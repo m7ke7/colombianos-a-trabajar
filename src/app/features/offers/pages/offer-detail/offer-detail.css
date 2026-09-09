@@ -1,0 +1,237 @@
+.detail-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: #3182ce;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.btn-back:hover {
+  color: #2b6cb0;
+}
+
+.state-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #4a5568;
+  padding: 3rem 0;
+}
+
+.state-message.error {
+  color: #e53e3e;
+}
+
+/* Header */
+.detail-header {
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.badge-contract {
+  display: inline-block;
+  background-color: #edf2f7;
+  color: #4a5568;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.job-title {
+  margin: 0.75rem 0 0.5rem 0;
+  color: #1a202c;
+  font-size: 2rem;
+}
+
+.company-name {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.location-text {
+  margin: 0.5rem 0;
+  color: #718096;
+}
+
+.salary-text {
+  color: #38a169;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+}
+
+.salary-null {
+  color: #718096;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* Grid Layout */
+.detail-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Secciones */
+.info-section {
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.info-section h2 {
+  margin-top: 0;
+  color: #2d3748;
+  font-size: 1.25rem;
+  border-bottom: 2px solid #edf2f7;
+  padding-bottom: 0.5rem;
+}
+
+.description-text {
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.requirements-list {
+  padding-left: 1.25rem;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.language-badges {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.lang-badge {
+  background-color: #f7fafc;
+  border: 1px solid #cbd5e1;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #718096;
+}
+
+.lang-badge.active {
+  border-color: #3182ce;
+  background-color: #ebf8ff;
+  color: #2b6cb0;
+  font-weight: 500;
+}
+
+/* Sidebar */
+.sidebar-card {
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.sidebar-card h3 {
+  margin-top: 0;
+  color: #2d3748;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.sidebar-card p {
+  margin: 0.5rem 0;
+  color: #4a5568;
+  font-size: 0.95rem;
+}
+
+.agency-card {
+  border-left: 4px solid #3182ce;
+}
+
+.external-link {
+  color: #3182ce;
+  text-decoration: none;
+}
+
+.external-link:hover {
+  text-decoration: underline;
+}
+
+.offer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.btn-action {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-edit {
+  background-color: #3182ce;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #2b6cb0;
+}
+
+.btn-delete {
+  background-color: #e53e3e;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #c53030;
+}
+
+.btn-apply {
+  width: 100%;
+  background-color: #38a169;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-apply:hover {
+  background-color: #2f855a;
+}

@@ -1,0 +1,79 @@
+<div class="detail-container">
+  
+  <a routerLink="/offers" class="btn-back">← Volver a las Ofertas</a>
+
+  <div *ngIf="loading" class="state-message">Cargando Detalles de la Oferta...</div>
+  <div *ngIf="!loading && (errorMessage || !offer)" class="state-message error">{{ errorMessage || 'Oferta No Encontrada' }}</div>
+  <ng-container *ngIf="!loading && offer">
+    
+    <header class="detail-header">
+      <span class="badge-contract">{{ offer.contractType }}</span>
+      <h1 class="job-title">{{ offer.title }}</h1>
+      <p class="company-name">🏢 {{ offer.company.name }}</p>
+      <p class="location-text">📍 {{ offer.location }}, Polonia</p>
+
+      <p *ngIf="offer.salary" class="salary-text">💰 {{ offer.salary }} PLN / mes</p>
+      <p *ngIf="!offer.salary" class="salary-null">Salario a convenir</p>
+    </header>
+
+    <div class="detail-grid">
+      <!-- Columna Principal -->
+      <div class="main-content">
+        
+        <section class="info-section">
+          <h2>Descripción del Puesto</h2>
+          <p class="description-text">{{ offer.description }}</p>
+        </section>
+
+        <section class="info-section">
+          <h2>Requisitos</h2>
+          <ul class="requirements-list">
+            <li *ngFor="let req of offer.requirements">{{ req }}</li>
+          </ul>
+        </section>
+
+        <section class="info-section">
+          <h2>Requisitos de Idioma</h2>
+          <div class="language-badges">
+            <span class="lang-badge" [class.active]="offer.requiresEnglish">
+              🇬🇧 Inglés: {{ offer.requiresEnglish ? 'Requerido' : 'No necesario' }}
+            </span>
+            <span class="lang-badge" [class.active]="offer.requiresPolish">
+              🇵🇱 Polaco: {{ offer.requiresPolish ? 'Requerido' : 'No necesario' }}
+            </span>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Columna Lateral (Empresa / Agencia) -->
+      <aside class="sidebar">
+        <div *ngIf="authService.isAdmin()" class="sidebar-card">
+          <h3>Información del Empleador</h3>
+          <p><strong>Empresa:</strong> {{ offer.company.name }}</p>
+          <p><strong>Sector:</strong> {{ offer.company.industry }}</p>
+          <p *ngIf="offer.company.website"><a [href]="offer.company.website" target="_blank" class="external-link">Sitio web oficial 🔗</a></p>
+        </div>
+
+          <div *ngIf="offer.agency" class="sidebar-card agency-card">
+            <h3>Agencia de Empleo</h3>
+            <p><strong>Nombre:</strong> {{ offer.agency.name }}</p>
+            <p><strong>Número KRAZ:</strong> {{ offer.agency.krazNumber }}</p>
+            <p *ngIf="offer.agency.rating"><strong>Valoración:</strong> ⭐ {{ offer.agency.rating }} / 5</p>
+          </div>
+
+        <div *ngIf="authService.isAdmin()" class="sidebar-card">
+          <h3>Administrar oferta</h3>
+          <div class="offer-actions">
+            <a [routerLink]="['/admin/edit-offer', offer.id]" class="btn-action btn-edit">Editar oferta</a>
+            <button type="button" class="btn-action btn-delete" (click)="deleteOffer()">Eliminar oferta</button>
+          </div>
+        </div>
+
+        <button class="btn-apply" type="button" onclick="alert('¡Postulación enviada con éxito!')">
+          Postular a esta oferta
+        </button>
+      </aside>
+    </div>
+  </ng-container>
+</div>

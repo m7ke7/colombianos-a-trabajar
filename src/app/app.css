@@ -1,0 +1,115 @@
+/* ==========================================
+   NAVBAR & NAVEGACIÓN
+   ========================================== */
+.navbar {
+  background: var(--card-bg);
+  border-bottom: 1.5px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--primary);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--primary);
+}
+
+/* Ocultar checkbox y hamburguesa en escritorio */
+.menu-toggle, .hamburger {
+  display: none;
+}
+
+.main-content {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* ==========================================
+   📱 MEDIA QUERIES (RESPONSIVO PARA MÓVILES)
+   ========================================== */
+@media (max-width: 768px) {
+  .main-content {
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+
+  /* Menú Hamburguesa */
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--secondary);
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  /* Menú colapsable en celular */
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--card-bg);
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+    border-bottom: 1.5px solid var(--border-color);
+    display: none; /* Oculto por defecto */
+    box-shadow: var(--shadow);
+  }
+
+  .nav-links a {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Mostrar menú al hacer clic en el botón hamburguesa */
+  .menu-toggle:checked ~ .nav-links {
+    display: flex;
+  }
+
+  /* Ajuste responsivo para Formularios */
+  .login-container, .register-container {
+    margin: 1.5rem 0.5rem;
+    padding: 1.5rem;
+  }
+}

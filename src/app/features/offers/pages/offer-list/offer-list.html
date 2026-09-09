@@ -1,0 +1,61 @@
+<div class="container">
+  
+  <h1 class="page-title">Ofertas de Empleo en Polonia 🇵🇱</h1>
+
+  <!-- Filtros -->
+  <div class="filters-container">
+    <input type="text" 
+           class="search-input"
+           [(ngModel)]="searchQuery" 
+           (input)="applyFilters()" 
+           placeholder="Buscar por puesto o empresa...">
+
+    <select class="filter-select" [(ngModel)]="selectedLocation" (change)="applyFilters()" title="Seleccionar ciudad">
+      <option value="">Todas las ciudades</option>
+      @for (loc of locations; track loc) {
+        <option [value]="loc">{{ loc }}</option>
+      }
+    </select>
+
+    <select class="filter-select" [(ngModel)]="selectedContract" (change)="applyFilters()" title="Seleccionar tipo de contrato">
+      <option value="">Todos los contratos</option>
+      @for (type of contractTypes; track type) {
+        <option [value]="type">{{ type }}</option>
+      }
+    </select>
+  </div>
+
+  <!-- Resultados -->
+  @if (filteredOffers.length === 0) {
+    <p class="no-results">No se encontraron ofertas que coincidan con los filtros.</p>
+  } @else {
+    <div class="offers-grid">
+      @for (offer of filteredOffers; track offer.id) {
+        <div class="offer-card">
+          <div>
+            <span class="badge-contract">{{ offer.contractType }}</span>
+            <h3 class="card-title">{{ offer.title }}</h3>
+            <p class="company-name">🏢 {{ offer.company.name }}</p>
+            <p class="location-text">📍 {{ offer.location }}</p>
+            
+            @if (offer.salary) {
+              <p class="salary-text">💰 {{ offer.salary }} PLN</p>
+            } @else {
+              <p class="salary-null">Salario no especificado</p>
+            }
+
+            @if (offer.agency) {
+              <p class="agency-tag">🤝 Agencia: {{ offer.agency.name }} (KRAZ: {{ offer.agency.krazNumber }})</p>
+            } @else {
+              <p class="direct-tag">⚡ Contratación Directa</p>
+            }
+          </div>
+
+          <button class="btn-details" [routerLink]="['/offers', offer.id]">
+            Ver Detalles
+          </button>
+        </div>
+      }
+    </div>
+  }
+</div>

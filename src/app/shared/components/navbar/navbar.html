@@ -1,0 +1,38 @@
+<header class="navbar">
+  <div class="nav-container">
+    <!-- Logo -->
+    <a routerLink="/offers" class="logo">
+      <span>Kolumbia</span> Do Pracy 🇵🇱🇨🇴
+    </a>
+
+    <!-- Botón Menú Móvil -->
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="hamburger" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </label>
+
+    <!-- Menú de Navegación -->
+    <nav class="nav-links">
+      <a routerLink="/offers" routerLinkActive="active">Ofertas</a>
+      <a *ngIf="authService.isAdmin()" routerLink="/admin/post-job" routerLinkActive="active">Publicar Empleo</a>
+
+      <!-- OPCIÓN 1: Si el usuario NO está autenticado -->
+      <ng-container *ngIf="!authService.isLoggedIn()">
+        <a routerLink="/login" class="btn btn-outline">Ingresar</a>
+        <a routerLink="/register" class="btn btn-primary">Registrarse</a>
+      </ng-container>
+
+      <!-- OPCIÓN 2: Si el usuario SÍ está autenticado -->
+      <ng-container *ngIf="authService.isLoggedIn()">
+        <span class="user-greeting">
+          Hola, <strong>{{ authService.currentUser()?.name }}</strong>
+        </span>
+        <button (click)="onLogout()" class="btn btn-logout">
+          Cerrar Sesión
+        </button>
+      </ng-container>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,129 @@
+<div class="form-container">
+  
+  <button type="button" class="btn-back" (click)="cancelAndGoBack()">← Cancelar y volver</button>
+
+  <h1 class="form-title">{{ isEditMode ? 'Editar Oferta de Empleo' : 'Publicar Nueva Oferta de Empleo' }} 🇵🇱</h1>
+
+  <form [formGroup]="jobForm" (ngSubmit)="onSubmit()" class="job-form">
+
+    <!-- Datos Básicos del Puesto -->
+    <fieldset class="form-section">
+      <legend>Información Principal del Puesto</legend>
+
+      <div class="form-group">
+        <label for="title">Título del Puesto *</label>
+        <input id="title" type="text" formControlName="title" placeholder="Ej. Operario de Logística o Frontend Dev">
+        <span *ngIf="jobForm.get('title')?.touched && jobForm.get('title')?.invalid" class="error-text">El título es obligatorio (mínimo 5 caracteres).</span>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="location">Ciudad en Polonia *</label>
+          <select id="location" formControlName="location">
+            <option value="">Selecciona una ciudad</option>
+            <option *ngFor="let city of locations" [value]="city">{{ city }}</option>
+          </select>
+          <span *ngIf="jobForm.get('location')?.touched && jobForm.get('location')?.invalid" class="error-text">Selecciona una ubicación.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="contractType">Tipo de Contrato *</label>
+          <select id="contractType" formControlName="contractType">
+            <option value="">Selecciona un contrato</option>
+            <option *ngFor="let type of contractTypes" [value]="type">{{ type }}</option>
+          </select>
+          <span *ngIf="jobForm.get('contractType')?.touched && jobForm.get('contractType')?.invalid" class="error-text">Selecciona el tipo de contrato.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="salary">Salario Mensual (PLN)</label>
+        <input id="salary" type="number" formControlName="salary" placeholder="Ej. 6000 (Dejar en blanco si no aplica)">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descripción del Puesto *</label>
+        <textarea id="description" formControlName="description" rows="4" placeholder="Describe las responsabilidades principales..."></textarea>
+        <span *ngIf="jobForm.get('description')?.touched && jobForm.get('description')?.invalid" class="error-text">La descripción debe tener al menos 20 caracteres.</span>
+      </div>
+    </fieldset>
+
+    <!-- Idiomas -->
+    <fieldset class="form-section">
+      <legend>Requisitos de Idioma</legend>
+      <div class="checkbox-group">
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="requiresPolish">
+          Requiere Polaco 🇵🇱
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" formControlName="requiresEnglish">
+          Requiere Inglés 🇬🇧
+        </label>
+      </div>
+    </fieldset>
+
+    <!-- Datos de la Empresa -->
+    <fieldset class="form-section" formGroupName="company">
+      <legend>Datos de la Empresa Empleadora</legend>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="compName">Nombre de la Empresa *</label>
+          <input id="compName" type="text" formControlName="name" placeholder="Ej. Amazon Polonia">
+          <span *ngIf="jobForm.get('company.name')?.touched && jobForm.get('company.name')?.invalid" class="error-text">Nombre de la empresa obligatorio.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="compIndustry">Sector / Industria *</label>
+          <input id="compIndustry" type="text" formControlName="industry" placeholder="Ej. Logística, IT, Manufactura">
+          <span *ngIf="jobForm.get('company.industry')?.touched && jobForm.get('company.industry')?.invalid" class="error-text">Sector obligatorio.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="compWebsite">Sitio Web (Opcional)</label>
+        <input id="compWebsite" type="url" formControlName="website" placeholder="https://ejemplo.com">
+      </div>
+    </fieldset>
+
+    <!-- Toggle Agencia de Empleo -->
+    <fieldset class="form-section">
+      <legend>Gestión de Contratación</legend>
+      <label class="checkbox-label">
+        <input type="checkbox" formControlName="isAgency">
+        ¿Esta oferta es gestionada a través de una Agencia de Empleo?
+      </label>
+
+      <div *ngIf="jobForm.get('isAgency')?.value" formGroupName="agency" class="agency-fields">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="agencyName">Nombre de la Agencia *</label>
+              <input id="agencyName" type="text" formControlName="name" placeholder="Ej. WorkExpress Poland">
+            </div>
+
+            <div class="form-group">
+              <label for="kraz">Número KRAZ (Registro Oficial) *</label>
+              <input id="kraz" type="text" formControlName="krazNumber" placeholder="Ej. 18402">
+            </div>
+          </div>
+        </div>
+    </fieldset>
+
+    <!-- Requisitos Dinámicos -->
+    <fieldset class="form-section">
+      <legend>Requisitos del Puesto</legend>
+      <div formArrayName="requirements">
+        <div *ngFor="let req of requirements.controls; let i = index" class="requirement-input-group">
+          <input [formControlName]="i" placeholder="Ej. Experiencia previa de 1 año">
+          <button *ngIf="requirements.length > 1" type="button" class="btn-remove" (click)="removeRequirement(i)">✕</button>
+        </div>
+      </div>
+      <button type="button" class="btn-add-req" (click)="addRequirement()">+ Agregar otro requisito</button>
+    </fieldset>
+
+    <!-- Botón Submit -->
+    <button type="submit" class="btn-submit">{{ isEditMode ? 'Guardar Cambios' : 'Publicar Oferta' }}</button>
+
+  </form>
+</div>
